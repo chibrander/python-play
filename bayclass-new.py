@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import re
 
 class bay:
-    def make(x):
+    def make(x,kw):
 
         try:
-            url = 'http://www.ebay.com/sch/i.html?_from=R40&_sacat=0&LH_Complete=1&LH_Sold=1&LH_ItemCondition=3&_nkw=sexy+one+size&_pgn=' + str(x) + '&_ipg=200&rt=nc'
+            url = 'http://www.ebay.com/sch/i.html?_from=R40&_sacat=0&LH_Complete=1&LH_Sold=1&LH_ItemCondition=3&_nkw=' + kw + '&_pgn=' + str(x) + '&_ipg=200&rt=nc'
             headers = {}
             headers['User-Agent'] = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
             req = urllib.request.Request(url, headers = headers)
@@ -75,4 +75,3 @@ class bay:
         df1['Image'] = df4
         df1.to_excel(fn + str(n) + '.xlsx', index=False)
         print('Created: ' + fn + str(n) + '.xlsx')
-        #df1.to_csv("data.csv", mode='a', header=False)
