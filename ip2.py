@@ -50,6 +50,7 @@ class Bay:
 
     def getips(self):
         #ipurl = 'http://www.samair.ru/proxy-by-country/China-01.htm'
+        #ipurl = 'https://www.us-proxy.org/'
         ipurl = 'http://www.samair.ru/proxy-by-country/United-States-01.htm'
         self.getfile(ipurl,self.proxy)
         t = self.get_tables(self.gethtml("data"))
