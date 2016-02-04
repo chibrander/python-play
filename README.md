@@ -14,3 +14,8 @@ BeautifulSoup 4 - bs4
 ipwhois
 
 requests
+
+
+QT Designer for Python UI
+
+https://www.youtube.com/watch?v=GLqrzLIIW2E
