@@ -103,6 +103,11 @@ class Bay:
         for title in listings:
             titlearray.append(title.find(class_="lvtitle").a.get_text())
 
+        linkarray = []
+        for link in listings:
+            linkarray.append(link.find(class_="lvtitle").a.get('href'))
+        #print(linkarray)
+
 
         dates = soup.find_all(class_="tme")
         datearray = []
@@ -170,6 +175,7 @@ class Bay:
         df5 = pd.DataFrame(data = shippingarray, columns=['Shipping'])
         df6 = pd.DataFrame(data = fromarray, columns=['From'])
         df7 = pd.DataFrame(data = auctionarray, columns=['Auction','Bids','Bids Text'])
+        df8 = pd.DataFrame(data = linkarray, columns=['Link'])
 
         df1['Prices'] = df2
         df1['Dates'] = df3
@@ -177,6 +183,8 @@ class Bay:
         df1['Shipping'] = df5
         df1['From'] = df6
         df1[['Auction','Bids','Bids Text']] = df7
+        df1['Link'] = df8
+
         df1.to_excel(fn + str(n) + '.xlsx', index=False)
         print('Created: ' + fn + str(n) + '.xlsx')
 
@@ -184,9 +192,15 @@ class Bay:
 
 # Set Initial Proxy to Get New Proxies
 me = Bay("111.14.40.155:8081")
+
+# Get New Proxies
 #me.getips()
 #print(me.proxies)
+
+# Or Use Your Own Proxies
 me.proxies = ['52.27.149.22:80','161.68.250.139:80','161.68.250.181:8080']
+
+
 me.set(1,'sexy+one+size')
 time.sleep(3)
 me.get(1,'tst')
