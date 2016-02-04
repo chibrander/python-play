@@ -143,7 +143,7 @@ class Bay:
             try:
                 shippingarray.append(shipping.find(class_="bfsp").string)
             except:
-                shippingarray.append("")
+                shippingarray.append("None")
 
 
         fromarray = []
