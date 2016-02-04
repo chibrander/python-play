@@ -201,6 +201,6 @@ me = Bay("111.14.40.155:8081")
 me.proxies = ['52.27.149.22:80','161.68.250.139:80','161.68.250.181:8080']
 
 
-me.set(1,'sexy+one+size')
+me.set(3,'sexy+one+size')
 time.sleep(3)
-me.get(1,'tst')
+me.get(3,'tst')
