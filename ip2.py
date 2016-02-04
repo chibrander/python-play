@@ -10,7 +10,7 @@ import time
 class Bay:
     def __init__(self,initial_proxy):
             self.proxy = initial_proxy
-            self.proxies = self.getips()
+            self.proxies = []
 
     def getfile(self,url,proxy,ext=""):
         proxies = {
@@ -56,6 +56,7 @@ class Bay:
         arr = []
         for p in t:
             arr.append(p.td.string)
+        self.proxies = arr
         return arr
 
 
@@ -91,15 +92,16 @@ class Bay:
 
     def get(self,n,fn):
         html_doc = self.gethtml("data.ht")
-        html_doc = html_doc.replace("\\n","")
-        html_doc = html_doc.replace("\\r","")
-        html_doc = html_doc.replace("\\t","")
+        html_doc = html_doc.replace("\n","")
+        html_doc = html_doc.replace("\r","")
+        html_doc = html_doc.replace("\t","")
         soup = BeautifulSoup(html_doc, 'html.parser')
-        titles = soup.find_all(class_="lvtitle")
-
+        listings = soup.find_all(class_="lvresult")
+        #titles = soup.find_all(class_="lvtitle")
+        #print(listings)
         titlearray = []
-        for title in titles:
-            titlearray.append(title.a.string)
+        for title in listings:
+            titlearray.append(title.find(class_="lvtitle").a.get_text())
 
 
         dates = soup.find_all(class_="tme")
@@ -120,11 +122,9 @@ class Bay:
                     imagearray.append("")
 
 
-        prices = soup.find_all(class_="bold bidsold")
-
         pricearray = []
-        for price in prices:
-            pr = price.string
+        for price in listings:
+            pr = price.find(class_="bold bidsold").string
             try:
                 p = re.search('[\d.,]+', pr)
                 prc = p.group(0)
@@ -132,13 +132,51 @@ class Bay:
                 prc = "NaN"
             pricearray.append(prc)
 
+
+        shippingarray = []
+        for shipping in listings:
+            try:
+                shippingarray.append(shipping.find(class_="bfsp").string)
+            except:
+                shippingarray.append("")
+
+
+        fromarray = []
+        for fr in listings:
+            try:
+                fromarray.append(fr.find(class_="lvdetails").findAll("li")[1].get_text())
+            except:
+                fromarray.append("")
+        #print(fromarray)
+
+        auctionarray = []
+        for auction in listings:
+            try:
+                atext = auction.find(class_="lvformat").get_text()
+                if atext == "Buy It Now":
+                    auctionarray.append((atext,atext,""))
+                else:
+                    auctionarray.append((atext[-4:],"Bids",re.search('[\d]+', atext).group(0)))
+            except:
+                auctionarray.append("")
+        #print(auctionarray)
+
+
+
         df1 = pd.DataFrame(data = titlearray, columns=['Titles'])
         df2 = pd.DataFrame(data = pricearray, columns=['Price'])
         df3 = pd.DataFrame(data = datearray, columns=['Date'])
         df4 = pd.DataFrame(data = imagearray, columns=['Image'])
+        df5 = pd.DataFrame(data = shippingarray, columns=['Shipping'])
+        df6 = pd.DataFrame(data = fromarray, columns=['From'])
+        df7 = pd.DataFrame(data = auctionarray, columns=['Auction','Bids','Bids Text'])
+
         df1['Prices'] = df2
         df1['Dates'] = df3
         df1['Image'] = df4
+        df1['Shipping'] = df5
+        df1['From'] = df6
+        df1[['Auction','Bids','Bids Text']] = df7
         df1.to_excel(fn + str(n) + '.xlsx', index=False)
         print('Created: ' + fn + str(n) + '.xlsx')
 
@@ -146,11 +184,9 @@ class Bay:
 
 # Set Initial Proxy to Get New Proxies
 me = Bay("111.14.40.155:8081")
-
-print(me.proxies)
-
+#me.getips()
+#print(me.proxies)
+me.proxies = ['52.27.149.22:80','161.68.250.139:80','161.68.250.181:8080']
 me.set(1,'sexy+one+size')
-time.sleep(5)
+time.sleep(3)
 me.get(1,'tst')
-
-print(me.proxies)
