@@ -15,6 +15,16 @@ ipwhois
 
 requests
 
+xlrd
+
+six
+
+pytz
+
+python-dateutil
+
+openpyxl
+
 
 QT Designer for Python UI
 
