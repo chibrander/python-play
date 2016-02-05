@@ -68,7 +68,7 @@ class Bay:
 
     def set(self,pagenum,kw):
         try:
-            url = 'http://www.ebay.com/sch/i.html?_from=R40&_sacat=0&LH_Complete=1&LH_Sold=1&LH_ItemCondition=3&_nkw=' + kw + '&_pgn=' + str(pagenum) + '&_ipg=200&rt=nc'
+            url = 'http://www.ebay.com/sch/i.html?_from=R40&_sacat=0&LH_Complete=1&LH_Sold=1&LH_ItemCondition=3&_nkw=' + kw + '&_pgn=' + str(pagenum) + '&_ipg=200&rt=nc&_dmd=1'
             if len(self.proxies) > 0:
                 countries = get_countries()
                 obj = IPWhois(self.proxies[0].split(':')[0])
