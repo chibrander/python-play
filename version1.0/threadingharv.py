@@ -3,27 +3,31 @@ import time
 import random
 from threading import Thread
 
+
+def rotate(lst,shiftnumber):
+    return lst[shiftnumber:len(lst)] + lst[0:shiftnumber]
+
+me = []
 # Set Initial Proxy to Get New Proxies
-me = e.Bay("111.14.40.155:8081")
 
-# Get New Proxies
-me.getips()
-print(me.proxies)
-
-me2 = e.Bay("111.14.40.155:8081")
-
-# Get New Proxies
-me2.getips()
-print(me2.proxies)
+for n in range(1,5):
+    me.append(e.Bay("40.76.53.46:80"))
 
 
-# Or Use Your Own Proxies
-proxz = me.proxies
-proxz = list(reversed(proxz))
+me[0].getips()
 
-me.proxies = proxz
 
-print(me.proxies)
+plist = me[0].proxies
+print(plist)
+
+lnum = 0
+for obj in me:
+    obj.proxies = rotate(plist,lnum)
+    lnum = lnum + 7
+
+for i in me:
+    print(i.proxies)
+
 
 
 
@@ -38,9 +42,14 @@ def miltiharv(obj,kw,fn):
 #print(me.gethtml("data.ht"))
 
 def start():
-    trd1 = Thread(target=miltiharv,args=(me,"lingerie+plus","lingerieplus"))
-    trd2 = Thread(target=miltiharv,args=(me2,"lingerie+women","lingeriewomen"))
-    trd1.start()
-    trd2.start()
+    trd = []
+    kws = ["lingerie+plus","lingerie+women","lingerie","sexy+lingerie"]
+    i = 0
+    for obj in me:
+        trd.append(Thread(target=miltiharv,args=(obj,kws[i],kws[i].replace("+",""))))
+        i = i + 1
+
+    for tr in trd:
+        tr.start()
 
 start()
