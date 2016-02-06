@@ -1,7 +1,7 @@
 import pandas as pd
 
 ifile = 'sexyonesize'
-ofile = 'combinedsexyonesize'
+ofile = 'combined' + ifile
 qfile = 49
 
 def eread(x):
