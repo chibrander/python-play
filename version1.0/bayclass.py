@@ -28,8 +28,10 @@ class Bay:
                 pickle.dump(r.cookies,pcf)
                 pcf.close()
             else:
+                print("Inner Connection Failed!")
                 return "error"
         except:
+            print("Connection Failed!")
             return "error"
 
 
@@ -49,7 +51,7 @@ class Bay:
 
     def getips(self):
         #ipurl = 'http://www.samair.ru/proxy-by-country/China-01.htm'
-        ipurl = 'https://www.us-proxy.org/'
+        ipurl = 'http://www.us-proxy.org'
         self.getfile(ipurl,self.proxy)
         t = self.get_tables(self.gethtml("data"))
         #print(t)
@@ -80,6 +82,8 @@ class Bay:
                         print("Switching Proxy")
                         self.proxies.pop(0)
                         self.set(pagenum,kw)
+                    else:
+                        print(self.proxies[0])
 
                 else:
                     print(countries[results['nets'][0]['country']])
@@ -193,3 +197,4 @@ class Bay:
 
         df1.to_excel(fn + str(n) + '.xlsx', index=False)
         print('Created: ' + fn + str(n) + '.xlsx')
+        print('---------------------------------------------')
