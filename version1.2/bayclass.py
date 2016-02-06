@@ -5,6 +5,7 @@ import pandas as pd
 import re
 from ipwhois import IPWhois
 from ipwhois.utils import get_countries
+import os
 
 class Bay:
     def __init__(self,initial_proxy):
@@ -100,7 +101,7 @@ class Bay:
 
 
 
-    def get(self,n,fn):
+    def get(self,n,fn,dr):
         html_doc = self.gethtml("data.ht")
         html_doc = html_doc.replace("\n","")
         html_doc = html_doc.replace("\r","")
@@ -195,6 +196,6 @@ class Bay:
         df1[['Auction','Bids','Bids Text']] = df7
         df1['Link'] = df8
 
-        df1.to_excel(fn + str(n) + '.xlsx', index=False)
+        df1.to_excel(os.path.dirname(os.path.dirname(__file__)) + '/' +  dr + '/' + fn + str(n) + '.xlsx', index=False)
         print('Created: ' + fn + str(n) + '.xlsx')
         print('---------------------------------------------')

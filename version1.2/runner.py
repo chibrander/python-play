@@ -8,6 +8,7 @@ kws = ["lingerie plus","lingerie women","sexy lingerie"]
 proxyshift = 7
 firstproxy = '40.76.53.46:80'
 lastpage = 49
+dr = 'Excel'
 # set variables END
 
 # proxyshift function
@@ -37,12 +38,12 @@ for i in me:
     print(i.proxies)
 
 # Function to Harvest & Write Data with Random Intervals
-def miltiharv(obj,kw,fn):
+def miltiharv(obj,kw,fn,dr):
     for i in reversed(range(1,lastpage+1)):
         n = int(random.random()*100)+1+50
         obj.set(i,kw)
         time.sleep(3)
-        obj.get(i,fn)
+        obj.get(i,fn,dr)
         time.sleep(n)
 
 #print(me.gethtml("data.ht"))
@@ -52,7 +53,7 @@ def start():
     trd = []
     i = 0
     for obj in me:
-        trd.append(Thread(target=miltiharv,args=(obj,kws[i].replace(" ","+"),kws[i].replace("+",""))))
+        trd.append(Thread(target=miltiharv,args=(obj,kws[i].replace(" ","+"),kws[i].replace("+",""),dr)))
         i = i + 1
 
     for tr in trd:
