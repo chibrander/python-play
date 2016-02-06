@@ -5,10 +5,10 @@ from threading import Thread
 
 # set variables
 kws = ["lingerie plus","lingerie women","sexy lingerie"]
+dr = 'Excel'
 proxyshift = 7
 firstproxy = '40.76.53.46:80'
 lastpage = 49
-dr = 'Excel'
 # set variables END
 
 # proxyshift function
