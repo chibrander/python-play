@@ -53,7 +53,7 @@ def start():
     trd = []
     i = 0
     for obj in me:
-        trd.append(Thread(target=miltiharv,args=(obj,kws[i].replace(" ","+"),kws[i].replace("+",""),dr)))
+        trd.append(Thread(target=miltiharv,args=(obj,kws[i].replace(" ","+"),kws[i].replace(" ",""),dr)))
         i = i + 1
 
     for tr in trd:
