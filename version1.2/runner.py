@@ -4,7 +4,7 @@ import random
 from threading import Thread
 
 # set variables
-kws = ["lingerie plus","lingerie women","lingerie","sexy lingerie"]
+kws = ["lingerie plus","lingerie women","sexy lingerie"]
 proxyshift = 7
 firstproxy = '40.76.53.46:80'
 lastpage = 49
