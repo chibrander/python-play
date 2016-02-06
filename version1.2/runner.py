@@ -4,7 +4,7 @@ import random
 from threading import Thread
 
 # set variables
-kws = ["lingerie+plus","lingerie+women","lingerie","sexy+lingerie"]
+kws = ["lingerie plus","lingerie women","lingerie","sexy lingerie"]
 proxyshift = 7
 firstproxy = '40.76.53.46:80'
 lastpage = 49
@@ -52,7 +52,7 @@ def start():
     trd = []
     i = 0
     for obj in me:
-        trd.append(Thread(target=miltiharv,args=(obj,kws[i],kws[i].replace("+",""))))
+        trd.append(Thread(target=miltiharv,args=(obj,kws[i].replace(" ","+"),kws[i].replace("+",""))))
         i = i + 1
 
     for tr in trd:
