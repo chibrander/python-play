@@ -18,7 +18,7 @@ proxyshift = 7
 lastpage = 40
 
 uname = 'luggag5_pr'
-upass = 'luggag5_prpass'
+upass = 'pass'
 uhost= '205.134.250.36'
 udb = 'luggag5_pr'
 
