@@ -69,7 +69,7 @@ class Bay:
         return arr
 
 
-    def set(self,pagenum,fn,kw):
+    def set(self,pagenum,fn,kw,callback=None):
         try:
             url = 'http://www.ebay.com/sch/i.html?_from=R40&_sacat=0&LH_Complete=1&LH_Sold=1&LH_ItemCondition=3&_nkw=' + kw + '&_pgn=' + str(pagenum) + '&_ipg=200&rt=nc&_dmd=1'
             if len(self.proxies) > 0:
@@ -95,6 +95,8 @@ class Bay:
 
             else:
                 print("No Proxies in Queue")
+                if callback:
+                    callback()
 
 
         except Exception as e:
