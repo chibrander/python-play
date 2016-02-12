@@ -96,9 +96,14 @@ class Bay:
             else:
                 print("No Proxies in Queue")
                 if callback_proxies:
-                    self.proxies = callback_proxies()
+                    templist = callback_proxies()
+                    if isinstance(templist,list) == True:
+                        self.proxies = templist
+                    else:
+                        print("Callback function error")
+                        
                 if backup_proxylist:
-                    self.proxies = backup_proxylist
+                    self.proxies = self.proxies + backup_proxylist
 
 
         except Exception as e:
