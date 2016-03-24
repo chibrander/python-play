@@ -25,6 +25,7 @@ python-dateutil
 
 openpyxl
 
+http://www.programmingclasseschicago.com/
 
 QT Designer for Python UI
 
